@@ -1,16 +1,24 @@
 $(function() {
   
   
+
+  
   // login form submit button
   $('#submit-form').click(function() {
-    showLoader(true);
-    var formObject = collectForm();
-    var url = buildURL(formObject);
-    getData(url,formObject.token,'/entity/services').then(function(res) {
-      console.log('services')
-      console.log(res)
-      showLoader(false)
-    })
+    if (checkForm()) {
+      $('.warning').fadeOut('fast')
+      showLoader(true);
+      var formObject = collectForm();
+      var url = buildURL(formObject);
+      getData(url,formObject.token,'/entity/services').then(function(res) {
+        console.log('services')
+        console.log(res)
+        showLoader(false)
+      })
+    } else {
+      $('.warning').html('Please fill out all fields')
+      $('.warning').fadeIn('fast')
+    }
   })
   
   
@@ -51,6 +59,25 @@ function collectForm() {
     id:envID, 
     token:apiToken};
   return data;
+}
+
+
+// validate the form
+function checkForm() {
+  var managedDomain = $('#text-managed-domain').val();
+  var envID = $('#text-env-id').val();
+  var apiToken = $('#text-api-token').val();
+  var checkedRadio = $('input:radio[name="env-type"]:checked').attr('value');
+  if (checkedRadio == 'managed') {
+    if (managedDomain == "" || envID == "" || apiToken == "") {
+      return false;
+    } else { return true; }
+  } else {
+    if (envID == "" || apiToken == "") {
+      return false;
+    } else { return true; }
+  }
+  return false;
 }
 
 

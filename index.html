@@ -14,7 +14,7 @@
     
     <div class="auth-wrapper abs-center">
       <form id="login-form" class="inner abs-center">
-        <h2>Raw API Data</h2>
+        <h2>Dynatrace Raw API Data</h2>
         <div class="input-section">
           <div class="title">Environment Type</div>
           <input type="radio" class="radio" id="r1" name="env-type" value="saas" checked="checked"/>
@@ -33,9 +33,9 @@
         <div class="input-section">
           <div class="title">Authentication</div>
           <label for="text-env-id" class="label">Environment ID</label>
-          <input type="text" class="inputfield margin" id="text-env-id"/>
+          <input type="text" class="inputfield margin" id="text-env-id" required/>
           <label for="text-api-token" class="label">API Token</label>
-          <input type="text" class="inputfield" id="text-api-token"/>
+          <input type="text" class="inputfield" id="text-api-token" required/>
         </div>
         <div class="input-section buttons">
           <button id="submit-form" role="button" type="button" class="btn btn--primary">
@@ -45,6 +45,7 @@
             Submit
           </button>
           <a href="https://help.dynatrace.com/dynatrace-api/introduction/what-do-i-need-to-know-to-get-started/" target="_blank" role="button" type="button" class="btn btn--secondary">Help</a>
+          <div class="warning"></div>
         </div>
       </form>
       <div class="loading abs-center">
@@ -60,5 +61,7 @@
   </body>
   <script type="text/javascript" src="//assets.dynatrace.com/groundhog/v0.6.3/js/main.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js" integrity="sha256-7LkWEzqTdpEfELxcZZlS6wAx5Ff13zZ83lYO2/ujj7g=" crossorigin="anonymous"></script>
+  
+<!--  <script type="text/javascript" src="js/jquery.validate.min.js"></script>-->
   <script src="js/main.min.js" type="text/javascript"></script>
 </html>

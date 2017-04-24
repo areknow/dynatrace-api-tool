@@ -70,7 +70,7 @@
     width: 500px;
     height: 440px;
     z-index: 1;
-    transition: all .6s ease;
+    transition: all .5s ease;
     .heading {
       font-size: 30px;
       font-weight: bold;
@@ -90,6 +90,12 @@
     .buttons {
       button {
         margin-right: 10px;
+      }
+      .warning {
+        display: none;
+        color: #a51919;
+        font-size: 12px;
+        margin-top: 10px;
       }
     }
   }
