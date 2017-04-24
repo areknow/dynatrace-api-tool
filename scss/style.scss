@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.abs-center {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+}
+.col-wrapper {
+  font-size: 0;
+  .col {
+    display: inline-block; 
+    font-size: 13px; 
+    vertical-align: top; 
+  } 
+  .col10 { 
+    width: 10%;
+  }
+  .col15 {
+    width: 15%;
+  }
+  .col25 { 
+    width: 25%;
+  }
+  .col20 { 
+    width: 20%;
+  }
+  .col30 { 
+    width: 30%;
+  }
+  .col33 { 
+    width: 33%;
+  }
+  .col35 { 
+    width: 35%;
+  }
+  .col40 {
+    width: 40%;
+  }
+  .col50 {
+    width: 50%;
+  }
+  .col60 {
+    width: 60%;
+  }
+  .col70 {
+    width: 70%;
+  }
+  .col75 {
+    width: 75%;
+  }
+  .col85 {
+    width: 85%;
+  }
+}
+
+
+
+
+.auth-wrapper {
+  background: #242424;
+  color: white;
+  height: 100%;
+  width: 100%;
+  .inner {
+    width: 500px;
+    height: 440px;
+    z-index: 1;
+    transition: all .6s ease;
+    .heading {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .title {
+      color: #aaaaaa;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #676767;
+      padding-bottom: 10px;
+    }
+    .input-section {
+      margin-bottom: 40px;
+      .margin {
+        margin-bottom: 10px;
+      }
+    }
+    .buttons {
+      button {
+        margin-right: 10px;
+      }
+    }
+  }
+  .loading {
+    display: none;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+  }
+}
