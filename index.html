@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name='author' content='Arnaud P. Crowther'>
-    <title>Dynatrace - API Data</title>
+    <title>Dynatrace | API Data</title>
     <link href="css/groundhog.css" rel="stylesheet">
     <link href="css/font.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="res/favicon.png" rel="shortcut icon" > 
+    <link rel="icon" href="https://dt-cdn.net/assets/images/brand/favicon-63e287af7c.ico">
   </head>
   <body>
     
@@ -65,25 +65,25 @@
     
     
     <nav class="sidebar">
-      <a href="#timeseries" class="sidebar__item is-active">
+      <a id="side-timeseries" href="#timeseries" class="sidebar__item is-active">
         <span class="sidebar__headline">Timeseries</span>
       </a>
-      <a href="#problem-status" class="sidebar__item">
+      <a id="side-problem-status" href="#problem-status" class="sidebar__item">
         <span class="sidebar__headline">Problem Status</span>
       </a>
-      <a href="#problem-feed" class="sidebar__item">
+      <a id="side-problem-feed" href="#problem-feed" class="sidebar__item">
         <span class="sidebar__headline">Problem Feed</span>
       </a>
-      <a href="#applications" class="sidebar__item">
+      <a id="side-applications" href="#applications" class="sidebar__item">
         <span class="sidebar__headline">Applications</span>
       </a>
-      <a href="#services" class="sidebar__item">
+      <a id="side-services" href="#services" class="sidebar__item">
         <span class="sidebar__headline">Services</span>
       </a>
-      <a href="#hosts" class="sidebar__item">
+      <a id="side-hosts" href="#hosts" class="sidebar__item">
         <span class="sidebar__headline">Hosts</span>
       </a>
-      <a href="#process-groups" class="sidebar__item">
+      <a id="side-process-groups" href="#process-groups" class="sidebar__item">
         <span class="sidebar__headline">Process Groups</span>
       </a>
     </nav>
@@ -93,49 +93,119 @@
       <div class="main-list">
         <article id="timeseries">
           <h1>Timeseries</h1>
-          <p>In nec diam lacus. Ut sapien nisl, bibendum sit amet tristique ut, sodales ut urna. Phasellus a sem eget libero rutrum imperdiet vel vitae enim.</p>
+          <p>The timeseries endpoint delivers metrics that Dynatrace collects from the different monitored entities over time. This endpoint is used to read metrics, such as CPU usage, for selected entities over a given timeframe. By passing additional parameters this endpoint allows you to filter the selected timeseries for entity types and to specify what type of result aggregation the result should contain.</p>
+          <div class="endpoint-wrapper">
+            <h3>Timeseries endpoint</h3>
+            <code class="endpoint"></code>
+          </div>
+          <div class="print-header">
+            <div class="copy-button">
+              <svg viewBox="0 0 24 24"><path fill="#000000" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg>
+              <div class="text">COPY</div>
+            </div>
+          </div>
           <div class="print-wrapper">
             <code class="print-json"></code>
           </div>
         </article>
         <article id="problem-status">
           <h1>Problem Status</h1>
-          <p>In nec diam lacus. Ut sapien nisl, bibendum sit amet tristique ut, sodales ut urna. Phasellus a sem eget libero rutrum imperdiet vel vitae enim.</p>
+          <p>A call to the <code>/problem/status</code> endpoint returns the number of currently open problems organized by impact level (i.e., affecting applications, services, or infrastructure) so you know immediately when problems affect your customers.</p>
+          <div class="endpoint-wrapper">
+            <h3>Problem status endpoint</h3>
+            <code class="endpoint"></code>
+          </div>
+          <div class="print-header">
+            <div class="copy-button">
+              <svg viewBox="0 0 24 24"><path fill="#000000" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg>
+              <div class="text">COPY</div>
+            </div>
+          </div>
           <div class="print-wrapper">
             <code class="print-json"></code>
           </div>
         </article>
         <article id="problem-feed">
           <h1>Problem Feed</h1>
-          <p>In nec diam lacus. Ut sapien nisl, bibendum sit amet tristique ut, sodales ut urna. Phasellus a sem eget libero rutrum imperdiet vel vitae enim.</p>
+          <p>A call to <code>/problem/feed</code> returns the list of problems observed by Dynatrace during a relative period of time. Complete problem details may be large because the feed contains a subset of each problems’ meta information to give the caller the option of selecting all detail from specific problems. The <code>/problem/feed</code> endpoint offers additional query and filter parameters to enable you to specify which types of problems the API consumer is interested in.</p>
+          <div class="endpoint-wrapper">
+            <h3>Problem feed endpoint</h3>
+            <code class="endpoint"></code>
+          </div>
+          <div class="print-header">
+            <div class="copy-button">
+              <svg viewBox="0 0 24 24"><path fill="#000000" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg>
+              <div class="text">COPY</div>
+            </div>
+          </div>
           <div class="print-wrapper">
             <code class="print-json"></code>
           </div>
         </article>
         <article id="applications">
           <h1>Applications</h1>
-          <p>In nec diam lacus. Ut sapien nisl, bibendum sit amet tristique ut, sodales ut urna. Phasellus a sem eget libero rutrum imperdiet vel vitae enim.</p>
+          <p>A call to the <code>/applications</code> endpoint returns a list of currently monitored applications along with their attributes and relationships.</p>
+          <div class="endpoint-wrapper">
+            <h3>Applications endpoint</h3>
+            <code class="endpoint"></code>
+          </div>
+          <div class="print-header">
+            <div class="copy-button">
+              <svg viewBox="0 0 24 24"><path fill="#000000" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg>
+              <div class="text">COPY</div>
+            </div>
+          </div>
           <div class="print-wrapper">
             <code class="print-json"></code>
           </div>
         </article>
         <article id="services">
           <h1>Services</h1>
-          <p>In nec diam lacus. Ut sapien nisl, bibendum sit amet tristique ut, sodales ut urna. Phasellus a sem eget libero rutrum imperdiet vel vitae enim.</p>
+          <p>A call to the <code>/services</code> endpoint returns a list of currently monitored services along with their attributes and relationships.</p>
+          <div class="endpoint-wrapper">
+            <h3>Services endpoint</h3>
+            <code class="endpoint"></code>
+          </div>
+          <div class="print-header">
+            <div class="copy-button">
+              <svg viewBox="0 0 24 24"><path fill="#000000" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg>
+              <div class="text">COPY</div>
+            </div>
+          </div>
           <div class="print-wrapper">
             <code class="print-json"></code>
           </div>
         </article>
         <article id="hosts">
           <h1>Hosts</h1>
-          <p>In nec diam lacus. Ut sapien nisl, bibendum sit amet tristique ut, sodales ut urna. Phasellus a sem eget libero rutrum imperdiet vel vitae enim.</p>
+          <p>A call to the <code>/infrastructure/hosts</code> endpoint returns a list of currently monitored hosts along with their attributes and relationships.</p>
+          <div class="endpoint-wrapper">
+            <h3>Hosts endpoint</h3>
+            <code class="endpoint"></code>
+          </div>
+          <div class="print-header">
+            <div class="copy-button">
+              <svg viewBox="0 0 24 24"><path fill="#000000" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg>
+              <div class="text">COPY</div>
+            </div>
+          </div>
           <div class="print-wrapper">
             <code class="print-json"></code>
           </div>
         </article>
-        <article id="process-groups">
+        <article id="process-groups" class="last-article">
           <h1>Process Groups</h1>
-          <p>In nec diam lacus. Ut sapien nisl, bibendum sit amet tristique ut, sodales ut urna. Phasellus a sem eget libero rutrum imperdiet vel vitae enim.</p>
+          <p>A call to the <code>/infrastructure/process-groups</code> endpoint returns a list of currently monitored process-groups along with their attributes and relationships.</p>
+          <div class="endpoint-wrapper">
+            <h3>Process groups endpoint</h3>
+            <code class="endpoint"></code>
+          </div>
+          <div class="print-header">
+            <div class="copy-button">
+              <svg viewBox="0 0 24 24"><path fill="#000000" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg>
+              <div class="text">COPY</div>
+            </div>
+          </div>
           <div class="print-wrapper">
             <code class="print-json"></code>
           </div>
@@ -194,7 +264,8 @@
     </svg>
     
   </body>
-  <script type="text/javascript" src="js/groundhog.min.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js" integrity="sha256-7LkWEzqTdpEfELxcZZlS6wAx5Ff13zZ83lYO2/ujj7g=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="js/groundhog.min.js"></script>
+  <script type="text/javascript" src="js/waypoint.min.js"></script>
   <script src="js/main.js" type="text/javascript"></script>
 </html>

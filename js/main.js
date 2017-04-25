@@ -2,7 +2,6 @@
 
 $(function() {
   
-  
 
 
   
@@ -29,7 +28,11 @@ $(function() {
         console.log(a6)
         console.log(a7)
         showLoader(false)
-        hideLogin(true)
+        setTimeout(function() {
+          hideLogin(true)
+          
+        },1500)
+        initWayPoints();
       });
       
       
@@ -73,11 +76,10 @@ $(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
     && location.hostname == this.hostname) {
       var target = $(this.hash);
-      target.addClass('active');
       target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
       if (target.length) {
         $('html,body').animate({
-          scrollTop: target.offset().top -90
+          scrollTop: target.offset().top -114
         }, 500);
         return false;
       }
@@ -176,7 +178,7 @@ function showWarning(bool,message) {
 }
 
 
-
+// hide and show login screen
 function hideLogin(bool) {
   if(bool) {
     $('.auth-wrapper').slideUp()
@@ -187,23 +189,18 @@ function hideLogin(bool) {
 
 
 
-//function getApplications(url,token) {
-//  getData(url,token,'/entity/applications').then(function(res) {
-//    console.log(res)
-//  }).catch(function(rejected){
-//  });
-//}
 
 
 
+// ajax calls for mainlist
 function ajaxTimeseries(url,token) {
   request = '/timeseries';
   return $.ajax({
     url : url+request+'?Api-Token='+token
   }).done(function(data) {
-//    console.log(data)
+    var endpoint = url+request+'?Api-Token='+token
     var myJSON = JSON.stringify(data)
-    console.log(myJSON)
+    $('#timeseries .endpoint').html(endpoint)
     $('#timeseries .print-json').html(myJSON)
   })
 }
@@ -211,56 +208,149 @@ function ajaxProblemStatus(url,token) {
   request = '/problem/status';
   return $.ajax({
     url : url+request+'?Api-Token='+token
+  }).done(function(data) {
+    var endpoint = url+request+'?Api-Token='+token
+    var myJSON = JSON.stringify(data)
+    $('#problem-status .endpoint').html(endpoint)
+    $('#problem-status .print-json').html(myJSON)
   })
 }
 function ajaxProblemFeed(url,token) {
   request = '/problem/feed';
   return $.ajax({
     url : url+request+'?Api-Token='+token
+  }).done(function(data) {
+    var endpoint = url+request+'?Api-Token='+token
+    var myJSON = JSON.stringify(data)
+    $('#problem-feed .endpoint').html(endpoint)
+    $('#problem-feed .print-json').html(myJSON)
   })
 }
 function ajaxApplications(url,token) {
   request = '/entity/applications';
   return $.ajax({
     url : url+request+'?Api-Token='+token,
+  }).done(function(data) {
+    var endpoint = url+request+'?Api-Token='+token
+    var myJSON = JSON.stringify(data)
+    $('#applications .endpoint').html(endpoint)
+    $('#applications .print-json').html(myJSON)
   })
 }
 function ajaxServices(url,token) {
   request = '/entity/services';
   return $.ajax({
     url : url+request+'?Api-Token='+token,
+  }).done(function(data) {
+    var endpoint = url+request+'?Api-Token='+token
+    var myJSON = JSON.stringify(data)
+    $('#services .endpoint').html(endpoint)
+    $('#services .print-json').html(myJSON)
   })
 }
 function ajaxHosts(url,token) {
   request = '/entity/infrastructure/hosts';
   return $.ajax({
     url : url+request+'?Api-Token='+token,
+  }).done(function(data) {
+    var endpoint = url+request+'?Api-Token='+token
+    var myJSON = JSON.stringify(data)
+    $('#hosts .endpoint').html(endpoint)
+    $('#hosts .print-json').html(myJSON)
   })
 }
 function ajaxProcessGroups(url,token) {
   request = '/entity/infrastructure/process-groups';
   return $.ajax({
     url : url+request+'?Api-Token='+token,
+  }).done(function(data) {
+    var endpoint = url+request+'?Api-Token='+token
+    var myJSON = JSON.stringify(data)
+    $('#process-groups .endpoint').html(endpoint)
+    $('#process-groups .print-json').html(myJSON)
   })
 }
 
 
 
 
-//function jsonCallback(json){
-//  console.log(json);
-//}
-//
-//$.ajax({
-//  url: "http://run.plnkr.co/plunks/v8xyYN64V4nqCshgjKms/data-2.json",
-//  dataType: "jsonp"
-//});
-
-
-
-
-//requests 
-// 'entity/services'
-// 'problem/feed'
-// 'entity/applications'
-// 'hosts'
+function initWayPoints() {
+  var waypoint1 = new Waypoint({
+    element: document.getElementById('problem-status'),
+    handler: function(direction) {
+      if (direction=="down") {
+        $('.sidebar a').removeClass('is-active')
+        $('#side-problem-status').addClass('is-active')
+      } else if (direction=="up") {
+        $('#side-problem-status').removeClass('is-active')
+        $('#side-timeseries').addClass('is-active')
+      }
+    },
+    offset: 200
+  });
+  var waypoint2 = new Waypoint({
+    element: document.getElementById('problem-feed'),
+    handler: function(direction) {
+      if (direction=="down") {
+        $('.sidebar a').removeClass('is-active')
+        $('#side-problem-feed').addClass('is-active')
+      } else if (direction=="up") {
+        $('#side-problem-feed').removeClass('is-active')
+        $('#side-problem-status').addClass('is-active')
+      }
+    },
+    offset: 200
+  });
+  var waypoint3 = new Waypoint({
+    element: document.getElementById('applications'),
+    handler: function(direction) {
+      if (direction=="down") {
+        $('.sidebar a').removeClass('is-active')
+        $('#side-applications').addClass('is-active')
+      } else if (direction=="up") {
+        $('#side-applications').removeClass('is-active')
+        $('#side-problem-feed').addClass('is-active')
+      }
+    },
+    offset: 200
+  });
+  var waypoint3 = new Waypoint({
+    element: document.getElementById('services'),
+    handler: function(direction) {
+      if (direction=="down") {
+        $('.sidebar a').removeClass('is-active')
+        $('#side-services').addClass('is-active')
+      } else if (direction=="up") {
+        $('#side-services').removeClass('is-active')
+        $('#side-applications').addClass('is-active')
+      }
+    },
+    offset: 200
+  });
+  var waypoint4 = new Waypoint({
+    element: document.getElementById('hosts'),
+    handler: function(direction) {
+      if (direction=="down") {
+        $('.sidebar a').removeClass('is-active')
+        $('#side-hosts').addClass('is-active')
+      } else if (direction=="up") {
+        $('#side-hosts').removeClass('is-active')
+        $('#side-services').addClass('is-active')
+      }
+    },
+    offset: 200
+  });
+  var waypoint5 = new Waypoint({
+    element: document.getElementById('process-groups'),
+    handler: function(direction) {
+      if (direction=="down") {
+        $('.sidebar a').removeClass('is-active')
+        $('#side-process-groups').addClass('is-active')
+      } else if (direction=="up") {
+        $('#side-process-groups').removeClass('is-active')
+        $('#side-hosts').addClass('is-active')
+      }
+    },
+    offset: 200
+  });
+}
