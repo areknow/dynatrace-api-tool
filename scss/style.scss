@@ -61,16 +61,78 @@
 
 
 
+/*=========================================================
+|                        NAV
+=========================================================*/
+.nav-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+/*=========================================================
+|                        MAIN
+=========================================================*/
+.sidebar {
+  position: fixed;
+  top: 74px;
+  height: 100%;
+  background: #F8F8F8;
+}
+.main-list-wrapper {
+  padding-left: 284px;
+  padding-top: 74px;
+  .main-list {
+    padding: 16px;
+    article {
+      margin-bottom: 80px;
+    }
+    .print-wrapper {
+      background: #f0f0f0;
+      border: 1px solid #d8d8d8;
+      padding: 10px;
+      border-radius: 5px;
+      max-height: 500px;
+      overflow-y: scroll;
+      font-size: 12px;
+    }
+  }
+}
+
+/*=========================================================
+|                        LOGIN
+=========================================================*/
 .auth-wrapper {
+  display: none;
+  z-index: 100;
   background: #242424;
   color: white;
   height: 100%;
   width: 100%;
   .inner {
     width: 500px;
-    height: 440px;
+    height: 468px;
     z-index: 1;
     transition: all .5s ease;
+    .header-wrap {
+      margin-bottom: 40px;
+      img {
+        height: 40px;
+        width: auto;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 40px;
+        margin-left: 26px;
+        color: grey;
+      }
+    }
+    
     .heading {
       font-size: 30px;
       font-weight: bold;
@@ -106,3 +168,6 @@
     z-index: 2;
   }
 }
+
+
+
