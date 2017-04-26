@@ -30,7 +30,6 @@ $(function() {
         showLoader(false)
         setTimeout(function() {
           hideLogin(true)
-          
         },1500)
         initWayPoints();
       });
@@ -67,6 +66,15 @@ $(function() {
       $('#login-form').css('height','468px'); 
     }
   });
+  
+  
+  
+  $('.copy-button').click(function() {
+    var parent = $(this).closest('article').children('.print-wrapper').children('.print-json')
+    console.log(parent.attr('id'))
+    CopyToClipboard(parent.attr('id'))
+  })
+  
   
   
   //anchor scroll
@@ -139,7 +147,7 @@ function checkForm() {
 function buildURL(data) {
   var url;
   if (data.type == "saas") {
-    url = 'https://'+data.id+'.live.dynatrace.com/api/v1'
+    url = 'https://'+data.id+'.live.dynatrace.com/api/v1/'
   } else if (data.type == "managed") {
     url = 'https://'+data.domain+'/e/'+data.id+'/api/v1/'
   }
@@ -194,7 +202,7 @@ function hideLogin(bool) {
 
 // ajax calls for mainlist
 function ajaxTimeseries(url,token) {
-  request = '/timeseries';
+  request = 'timeseries';
   return $.ajax({
     url : url+request+'?Api-Token='+token
   }).done(function(data) {
@@ -205,7 +213,7 @@ function ajaxTimeseries(url,token) {
   })
 }
 function ajaxProblemStatus(url,token) {
-  request = '/problem/status';
+  request = 'problem/status';
   return $.ajax({
     url : url+request+'?Api-Token='+token
   }).done(function(data) {
@@ -216,7 +224,7 @@ function ajaxProblemStatus(url,token) {
   })
 }
 function ajaxProblemFeed(url,token) {
-  request = '/problem/feed';
+  request = 'problem/feed';
   return $.ajax({
     url : url+request+'?Api-Token='+token
   }).done(function(data) {
@@ -238,7 +246,7 @@ function ajaxApplications(url,token) {
   })
 }
 function ajaxServices(url,token) {
-  request = '/entity/services';
+  request = 'entity/services';
   return $.ajax({
     url : url+request+'?Api-Token='+token,
   }).done(function(data) {
@@ -249,7 +257,7 @@ function ajaxServices(url,token) {
   })
 }
 function ajaxHosts(url,token) {
-  request = '/entity/infrastructure/hosts';
+  request = 'entity/infrastructure/hosts';
   return $.ajax({
     url : url+request+'?Api-Token='+token,
   }).done(function(data) {
@@ -260,7 +268,7 @@ function ajaxHosts(url,token) {
   })
 }
 function ajaxProcessGroups(url,token) {
-  request = '/entity/infrastructure/process-groups';
+  request = 'entity/infrastructure/process-groups';
   return $.ajax({
     url : url+request+'?Api-Token='+token,
   }).done(function(data) {
@@ -353,4 +361,27 @@ function initWayPoints() {
     },
     offset: 200
   });
+}
+
+
+
+
+
+
+
+
+function CopyToClipboard(containerid) {
+  if (document.selection) { 
+    document.getSelection().removeAllRanges();
+    var range = document.body.createTextRange();
+    range.moveToElementText(document.getElementById(containerid));
+    range.select().createTextRange();
+    document.execCommand("Copy"); 
+  } else if (window.getSelection) {
+    window.getSelection().removeAllRanges();
+    var range = document.createRange();
+    range.selectNode(document.getElementById(containerid));
+    window.getSelection().addRange(range);
+    document.execCommand("Copy");
+  }
 }
