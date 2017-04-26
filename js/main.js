@@ -21,20 +21,10 @@ $(function() {
              ajaxServices(url,formObject.token),
              ajaxHosts(url,formObject.token),
              ajaxProcessGroups(url,formObject.token)
-            ).done(function(a1,a2,a3,a4,a5,a6,a7){
-        console.log(a1)
-        console.log(a2)
-        console.log(a3)
-        console.log(a4)
-        console.log(a5)
-        console.log(a6)
-        console.log(a7)
-        showLoader(false)
-        setTimeout(function() {
-//          showtoast('Authentication successfull')
-          hideLogin(true)
-        },1500)
-        initWayPoints();
+            ).done(function(){
+        finishAuth()
+      }).fail(function() {
+        finishAuth();
       });
       
       
@@ -93,7 +83,13 @@ $(function() {
 
 
 
-
+function finishAuth() {
+  showLoader(false)
+  setTimeout(function() {
+    hideLogin(true)
+  },1500)
+  initWayPoints();
+}
 
 
 // get the form element values
@@ -193,6 +189,8 @@ function ajaxTimeseries(url,token) {
     var myJSON = JSON.stringify(data)
     $('#timeseries .endpoint').html(endpoint)
     $('#timeseries .print-json').html(myJSON)
+  }).error(function(error) {
+    $('#timeseries .endpoint').html('an error occured')
   })
 }
 function ajaxProblemStatus(url,token) {
@@ -204,6 +202,8 @@ function ajaxProblemStatus(url,token) {
     var myJSON = JSON.stringify(data)
     $('#problem-status .endpoint').html(endpoint)
     $('#problem-status .print-json').html(myJSON)
+  }).error(function(error) {
+    $('#timeseries .endpoint').html('an error occured')
   })
 }
 function ajaxProblemFeed(url,token) {
@@ -215,17 +215,21 @@ function ajaxProblemFeed(url,token) {
     var myJSON = JSON.stringify(data)
     $('#problem-feed .endpoint').html(endpoint)
     $('#problem-feed .print-json').html(myJSON)
+  }).error(function(error) {
+    $('#timeseries .endpoint').html('an error occured')
   })
 }
 function ajaxApplications(url,token) {
-  request = '/entity/applications';
+  request = 'entity/applications';
   return $.ajax({
     url : url+request+'?Api-Token='+token,
-  }).done(function(data) {
+  }).success(function(data) {
     var endpoint = url+request+'?Api-Token='+token
     var myJSON = JSON.stringify(data)
     $('#applications .endpoint').html(endpoint)
     $('#applications .print-json').html(myJSON)
+  }).error(function(error) {
+    $('#timeseries .endpoint').html('an error occured')
   })
 }
 function ajaxServices(url,token) {
@@ -237,6 +241,8 @@ function ajaxServices(url,token) {
     var myJSON = JSON.stringify(data)
     $('#services .endpoint').html(endpoint)
     $('#services .print-json').html(myJSON)
+  }).error(function(error) {
+    $('#timeseries .endpoint').html('an error occured')
   })
 }
 function ajaxHosts(url,token) {
@@ -248,6 +254,8 @@ function ajaxHosts(url,token) {
     var myJSON = JSON.stringify(data)
     $('#hosts .endpoint').html(endpoint)
     $('#hosts .print-json').html(myJSON)
+  }).error(function(error) {
+    $('#timeseries .endpoint').html('an error occured')
   })
 }
 function ajaxProcessGroups(url,token) {
@@ -259,6 +267,8 @@ function ajaxProcessGroups(url,token) {
     var myJSON = JSON.stringify(data)
     $('#process-groups .endpoint').html(endpoint)
     $('#process-groups .print-json').html(myJSON)
+  }).error(function(error) {
+    $('#timeseries .endpoint').html('an error occured')
   })
 }
 
