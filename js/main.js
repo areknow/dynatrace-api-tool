@@ -1,11 +1,13 @@
-
-
 $(function() {
   
-
-
   
-  // login form submit button
+  var showtoast = new ToastBuilder(); 
+  
+  
+//  $("input[name='keyword']").on("input", mark());
+  
+
+  // login form submit button action
   $('#submit-form').click(function() {
     if (checkForm()) {
       showWarning(false)
@@ -29,23 +31,11 @@ $(function() {
         console.log(a7)
         showLoader(false)
         setTimeout(function() {
+//          showtoast('Authentication successfull')
           hideLogin(true)
         },1500)
         initWayPoints();
       });
-      
-      
- 
-      
-//      getData(url,token,'/entity/applications').then(function(res) {
-//        console.log(res)
-//        showLoader(false)
-//        hideLogin(true)
-//        ajaxIsDone = true;
-//      }).catch(function(rejected){
-//        showWarning(true,'Something went wrong, please verify your information')
-//        showLoader(false)
-//      });
       
       
       
@@ -56,7 +46,7 @@ $(function() {
   })
   
   
-  // radio button click
+  // radio button click actions
   $('input:radio[name="env-type"]').click(function() {
     if($(this).attr('value') == 'managed') {
       $('#managed-domain-wrapper').slideDown();     
@@ -68,16 +58,14 @@ $(function() {
   });
   
   
-  
+  // copy button click actions
   $('.copy-button').click(function() {
     var parent = $(this).closest('article').children('.print-wrapper').children('.print-json')
-    console.log(parent.attr('id'))
-    CopyToClipboard(parent.attr('id'))
+    copyToClipboard(parent.attr('id'))
   })
   
   
-  
-  //anchor scroll
+  // anchor scroll
   $('a[href*=#]:not([href=#])').click(function(e) {
     $('.sidebar a').removeClass('is-active')
     $(this).addClass('is-active')
@@ -93,7 +81,6 @@ $(function() {
       }
     }
   });
-  
   
   
 })// end doc ready
@@ -196,10 +183,6 @@ function hideLogin(bool) {
 }
 
 
-
-
-
-
 // ajax calls for mainlist
 function ajaxTimeseries(url,token) {
   request = 'timeseries';
@@ -280,8 +263,7 @@ function ajaxProcessGroups(url,token) {
 }
 
 
-
-
+// initialize the scrolling waypoints 
 function initWayPoints() {
   var waypoint1 = new Waypoint({
     element: document.getElementById('problem-status'),
@@ -289,9 +271,11 @@ function initWayPoints() {
       if (direction=="down") {
         $('.sidebar a').removeClass('is-active')
         $('#side-problem-status').addClass('is-active')
+        $('.breadcrumbs__last').html('Problem Status')
       } else if (direction=="up") {
         $('#side-problem-status').removeClass('is-active')
         $('#side-timeseries').addClass('is-active')
+        $('.breadcrumbs__last').html('Timeseries')
       }
     },
     offset: 200
@@ -302,9 +286,11 @@ function initWayPoints() {
       if (direction=="down") {
         $('.sidebar a').removeClass('is-active')
         $('#side-problem-feed').addClass('is-active')
+        $('.breadcrumbs__last').html('Problem Feed')
       } else if (direction=="up") {
         $('#side-problem-feed').removeClass('is-active')
         $('#side-problem-status').addClass('is-active')
+        $('.breadcrumbs__last').html('Problem Status')
       }
     },
     offset: 200
@@ -315,9 +301,11 @@ function initWayPoints() {
       if (direction=="down") {
         $('.sidebar a').removeClass('is-active')
         $('#side-applications').addClass('is-active')
+        $('.breadcrumbs__last').html('Applications')
       } else if (direction=="up") {
         $('#side-applications').removeClass('is-active')
         $('#side-problem-feed').addClass('is-active')
+        $('.breadcrumbs__last').html('Problem Feed')
       }
     },
     offset: 200
@@ -328,9 +316,11 @@ function initWayPoints() {
       if (direction=="down") {
         $('.sidebar a').removeClass('is-active')
         $('#side-services').addClass('is-active')
+        $('.breadcrumbs__last').html('Services')
       } else if (direction=="up") {
         $('#side-services').removeClass('is-active')
         $('#side-applications').addClass('is-active')
+        $('.breadcrumbs__last').html('Applications')
       }
     },
     offset: 200
@@ -341,9 +331,11 @@ function initWayPoints() {
       if (direction=="down") {
         $('.sidebar a').removeClass('is-active')
         $('#side-hosts').addClass('is-active')
+        $('.breadcrumbs__last').html('Hosts')
       } else if (direction=="up") {
         $('#side-hosts').removeClass('is-active')
         $('#side-services').addClass('is-active')
+        $('.breadcrumbs__last').html('Services')
       }
     },
     offset: 200
@@ -354,9 +346,11 @@ function initWayPoints() {
       if (direction=="down") {
         $('.sidebar a').removeClass('is-active')
         $('#side-process-groups').addClass('is-active')
+        $('.breadcrumbs__last').html('Process Groups')
       } else if (direction=="up") {
         $('#side-process-groups').removeClass('is-active')
         $('#side-hosts').addClass('is-active')
+        $('.breadcrumbs__last').html('Hosts')
       }
     },
     offset: 200
@@ -364,13 +358,8 @@ function initWayPoints() {
 }
 
 
-
-
-
-
-
-
-function CopyToClipboard(containerid) {
+// create a selection range and copy the text to clipboard
+function copyToClipboard(containerid) {
   if (document.selection) { 
     document.getSelection().removeAllRanges();
     var range = document.body.createTextRange();
@@ -384,4 +373,77 @@ function CopyToClipboard(containerid) {
     window.getSelection().addRange(range);
     document.execCommand("Copy");
   }
+}
+
+
+//function mark() {
+//
+//    // Read the keyword
+//    var keyword = $("input[name='keyword']").val();
+//
+//    // Determine selected options
+//    var options = {};
+//    $("input[name='opt[]']").each(function() {
+//      options[$(this).val()] = $(this).is(":checked");
+//    });
+//
+//    // Remove previous marked elements and mark
+//    // the new keyword inside the context
+//    $(".context").unmark({
+//      done: function() {
+//        $(".context").mark(keyword, options);
+//      }
+//    });
+//  };
+
+
+
+
+
+
+
+
+
+
+function ToastBuilder(options) {
+  var opts = options || {};
+  opts.defaultText = opts.defaultText || 'default text';
+  opts.displayTime = opts.displayTime || 3000;
+  opts.target = opts.target || 'body';
+
+  return function (text) {
+    $('<div/>')
+    .addClass('toast')
+    .prependTo($(opts.target))
+    .text(text || opts.defaultText)
+    .queue(function(next) {
+      $(this).css({
+        'opacity': 1
+      });
+      var topOffset = 15;
+      $('.toast').each(function() {
+        var $this = $(this);
+        var height = $this.outerHeight();
+        var offset = 15;
+        $this.css('top', topOffset + 'px');
+        topOffset += height + offset;
+      });
+      next();
+    })
+    .delay(opts.displayTime)
+    .queue(function(next) {
+      var $this = $(this);
+      var width = $this.outerWidth() + 20;
+      $this.css({
+        'right': '-' + width + 'px',
+        'opacity': 0
+      });
+      next();
+    })
+    .delay(600)
+    .queue(function(next) {
+      $(this).remove();
+      next();
+    });
+  };
 }
