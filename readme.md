@@ -2,8 +2,8 @@
 
 A simple web app to display available API data for Dynatrace users
 
-![header image](https://github.com/areknow/dynatrace-raw-api-tool/raw/master/git1.jpg)
-![header image](https://github.com/areknow/dynatrace-raw-api-tool/raw/master/git2.jpg)
+![header image](https://github.com/areknow/dynatrace-api-tool/raw/master/res/git1.jpg)
+![header image](https://github.com/areknow/dynatrace-api-tool/raw/master/res/git2.jpg)
 
 
 ## About
