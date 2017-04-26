@@ -90,7 +90,6 @@
     <div class="main-list-wrapper">
       <div class="main-list">
         <article id="timeseries">
-<!--          <span data-toggle=snackbar data-content="This is my awesome snackbar!">Click me</span>-->
           <h1>Timeseries</h1>
           <p>The timeseries endpoint delivers metrics that Dynatrace collects from the different monitored entities over time. This endpoint is used to read metrics, such as CPU usage, for selected entities over a given timeframe. By passing additional parameters this endpoint allows you to filter the selected timeseries for entity types and to specify what type of result aggregation the result should contain.</p>
           <div class="endpoint-wrapper">
@@ -221,25 +220,25 @@
         </div>
         <div class="input-section">
           <div class="title">Environment Type</div>
-          <input type="radio" class="radio" id="r1" name="env-type" value="saas" />
+          <input type="radio" class="radio" id="r1" name="env-type" value="saas" checked="checked"/>
           <label for="r1" class="radio__label">
             <span class="radio__caption">SaaS</span>
           </label>
-          <input type="radio" class="radio" id="r2" name="env-type" value="managed" checked="checked"/>
+          <input type="radio" class="radio" id="r2" name="env-type" value="managed"/>
           <label for="r2" class="radio__label">
             <span class="radio__caption">Managed</span>
           </label>
           <div id="managed-domain-wrapper" style="display:none; margin-top:10px;">
             <label for="text-managed-domain" class="label">Managed Domain</label>
-            <input type="text" class="inputfield margin" id="text-managed-domain" value="dynatrace-managed.dxs-platform.com">
+            <input type="text" class="inputfield margin" id="text-managed-domain" value="">
           </div>
         </div>
         <div class="input-section">
           <div class="title">Authentication</div>
           <label for="text-env-id" class="label">Environment ID</label>
-          <input type="text" class="inputfield margin" id="text-env-id" required value="00cdfdb4-e9e4-4a4f-b2b7-8a20b3277321"/>
+          <input type="text" class="inputfield margin" id="text-env-id" required value=""/>
           <label for="text-api-token" class="label">API Token</label>
-          <input type="text" class="inputfield" id="text-api-token" required value="AiRaV1BdRGWaPc6UPUzNX"/>
+          <input type="text" class="inputfield" id="text-api-token" required value=""/>
         </div>
         <div class="input-section buttons">
           <button id="submit-form" role="button" type="button" class="btn btn--primary">
