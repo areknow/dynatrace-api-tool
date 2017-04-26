@@ -1,11 +1,6 @@
 $(function() {
   
   
-  var showtoast = new ToastBuilder(); 
-  
-  
-//  $("input[name='keyword']").on("input", mark());
-  
 
   // login form submit button action
   $('#submit-form').click(function() {
@@ -22,14 +17,10 @@ $(function() {
              ajaxHosts(url,formObject.token),
              ajaxProcessGroups(url,formObject.token)
             ).done(function(){
-        finishAuth()
+        finishAuth('API successfully accessed')
       }).fail(function() {
-        finishAuth();
+        finishAuth('Errors were detected');
       });
-      
-      
-      
-      
     } else {
       showWarning(true,'Please fill out all fields')
     }
@@ -82,11 +73,12 @@ $(function() {
 
 
 
-
-function finishAuth() {
+// actions taken when authentication is finished
+function finishAuth(message) {
   showLoader(false)
   setTimeout(function() {
     hideLogin(true)
+    $.snackbar({content: message});
   },1500)
   initWayPoints();
 }
@@ -190,7 +182,14 @@ function ajaxTimeseries(url,token) {
     $('#timeseries .endpoint').html(endpoint)
     $('#timeseries .print-json').html(myJSON)
   }).error(function(error) {
-    $('#timeseries .endpoint').html('an error occured')
+    $('#timeseries .print-json').html('no data to display')
+    $('#timeseries .endpoint').css('color','#c31425')
+    if (error.statusText == "error") {
+      $('#timeseries .endpoint').html('an error occured')
+    }
+    if (error.statusText == "Not Found" || error.statusText == "Unauthorized") {
+      $('#timeseries .endpoint').html(error.responseJSON.error.message)
+    }
   })
 }
 function ajaxProblemStatus(url,token) {
@@ -203,7 +202,14 @@ function ajaxProblemStatus(url,token) {
     $('#problem-status .endpoint').html(endpoint)
     $('#problem-status .print-json').html(myJSON)
   }).error(function(error) {
-    $('#timeseries .endpoint').html('an error occured')
+    $('#problem-status .print-json').html('no data to display')
+    $('#problem-status .endpoint').css('color','#c31425')
+    if (error.statusText == "error") {
+      $('#problem-status .endpoint').html('an error occured')
+    }
+    if (error.statusText == "Not Found" || error.statusText == "Unauthorized") {
+      $('#problem-status .endpoint').html(error.responseJSON.error.message)
+    }
   })
 }
 function ajaxProblemFeed(url,token) {
@@ -216,7 +222,14 @@ function ajaxProblemFeed(url,token) {
     $('#problem-feed .endpoint').html(endpoint)
     $('#problem-feed .print-json').html(myJSON)
   }).error(function(error) {
-    $('#timeseries .endpoint').html('an error occured')
+    $('#problem-feed .print-json').html('no data to display')
+    $('#problem-feed .endpoint').css('color','#c31425')
+    if (error.statusText == "error") {
+      $('#problem-feed .endpoint').html('an error occured')
+    }
+    if (error.statusText == "Not Found" || error.statusText == "Unauthorized") {
+      $('#problem-feed .endpoint').html(error.responseJSON.error.message)
+    }
   })
 }
 function ajaxApplications(url,token) {
@@ -229,7 +242,14 @@ function ajaxApplications(url,token) {
     $('#applications .endpoint').html(endpoint)
     $('#applications .print-json').html(myJSON)
   }).error(function(error) {
-    $('#timeseries .endpoint').html('an error occured')
+    $('#applications .print-json').html('no data to display')
+    $('#applications .endpoint').css('color','#c31425')
+    if (error.statusText == "error") {
+      $('#applications .endpoint').html('an error occured')
+    }
+    if (error.statusText == "Not Found" || error.statusText == "Unauthorized") {
+      $('#applications .endpoint').html(error.responseJSON.error.message)
+    }
   })
 }
 function ajaxServices(url,token) {
@@ -242,7 +262,14 @@ function ajaxServices(url,token) {
     $('#services .endpoint').html(endpoint)
     $('#services .print-json').html(myJSON)
   }).error(function(error) {
-    $('#timeseries .endpoint').html('an error occured')
+    $('#services .print-json').html('no data to display')
+    $('#services .endpoint').css('color','#c31425')
+    if (error.statusText == "error") {
+      $('#services .endpoint').html('an error occured')
+    }
+    if (error.statusText == "Not Found" || error.statusText == "Unauthorized") {
+      $('#services .endpoint').html(error.responseJSON.error.message)
+    }
   })
 }
 function ajaxHosts(url,token) {
@@ -255,7 +282,14 @@ function ajaxHosts(url,token) {
     $('#hosts .endpoint').html(endpoint)
     $('#hosts .print-json').html(myJSON)
   }).error(function(error) {
-    $('#timeseries .endpoint').html('an error occured')
+    $('#hosts .print-json').html('no data to display')
+    $('#hosts .endpoint').css('color','#c31425')
+    if (error.statusText == "error") {
+      $('#hosts .endpoint').html('an error occured')
+    }
+    if (error.statusText == "Not Found" || error.statusText == "Unauthorized") {
+      $('#hosts .endpoint').html(error.responseJSON.error.message)
+    }
   })
 }
 function ajaxProcessGroups(url,token) {
@@ -268,7 +302,14 @@ function ajaxProcessGroups(url,token) {
     $('#process-groups .endpoint').html(endpoint)
     $('#process-groups .print-json').html(myJSON)
   }).error(function(error) {
-    $('#timeseries .endpoint').html('an error occured')
+    $('#process-groups .print-json').html('no data to display')
+    $('#process-groups .endpoint').css('color','#c31425')
+    if (error.statusText == "error") {
+      $('#process-groups .endpoint').html('an error occured')
+    }
+    if (error.statusText == "Not Found" || error.statusText == "Unauthorized") {
+      $('#process-groups .endpoint').html(error.responseJSON.error.message)
+    }
   })
 }
 
@@ -376,35 +417,18 @@ function copyToClipboard(containerid) {
     range.moveToElementText(document.getElementById(containerid));
     range.select().createTextRange();
     document.execCommand("Copy"); 
+    $.snackbar({content: "Selection copied to clipboard"});
   } else if (window.getSelection) {
     window.getSelection().removeAllRanges();
     var range = document.createRange();
     range.selectNode(document.getElementById(containerid));
     window.getSelection().addRange(range);
     document.execCommand("Copy");
+    $.snackbar({content: "Selection copied to clipboard"});
   }
 }
 
 
-//function mark() {
-//
-//    // Read the keyword
-//    var keyword = $("input[name='keyword']").val();
-//
-//    // Determine selected options
-//    var options = {};
-//    $("input[name='opt[]']").each(function() {
-//      options[$(this).val()] = $(this).is(":checked");
-//    });
-//
-//    // Remove previous marked elements and mark
-//    // the new keyword inside the context
-//    $(".context").unmark({
-//      done: function() {
-//        $(".context").mark(keyword, options);
-//      }
-//    });
-//  };
 
 
 
@@ -415,45 +439,28 @@ function copyToClipboard(containerid) {
 
 
 
-function ToastBuilder(options) {
-  var opts = options || {};
-  opts.defaultText = opts.defaultText || 'default text';
-  opts.displayTime = opts.displayTime || 3000;
-  opts.target = opts.target || 'body';
 
-  return function (text) {
-    $('<div/>')
-    .addClass('toast')
-    .prependTo($(opts.target))
-    .text(text || opts.defaultText)
-    .queue(function(next) {
-      $(this).css({
-        'opacity': 1
-      });
-      var topOffset = 15;
-      $('.toast').each(function() {
-        var $this = $(this);
-        var height = $this.outerHeight();
-        var offset = 15;
-        $this.css('top', topOffset + 'px');
-        topOffset += height + offset;
-      });
-      next();
-    })
-    .delay(opts.displayTime)
-    .queue(function(next) {
-      var $this = $(this);
-      var width = $this.outerWidth() + 20;
-      $this.css({
-        'right': '-' + width + 'px',
-        'opacity': 0
-      });
-      next();
-    })
-    .delay(600)
-    .queue(function(next) {
-      $(this).remove();
-      next();
-    });
-  };
-}
+
+
+
+
+
+
+
+//function highlight_words(keywords, element) {
+//    if(keywords) {
+//        var textNodes;
+//        keywords = keywords.replace(/\W/g, '');
+//        var str = keywords.split(" ");
+//        $(str).each(function() {
+//            var term = this;
+//            var textNodes = $(element).contents().filter(function() { return this.nodeType === 3 });
+//            textNodes.each(function() {
+//              var content = $(this).text();
+//              var regex = new RegExp(term, "gi");
+//              content = content.replace(regex, '<span class="highlight">' + term + '</span>');
+//              $(this).replaceWith(content);
+//            });
+//        });
+//    }
+//}
